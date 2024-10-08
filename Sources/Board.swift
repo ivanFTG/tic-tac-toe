@@ -13,12 +13,109 @@ class Board {
         .emptySquare
     ]
 
-    func checkWinner() -> Robot.Player? {
-        // we need to check if there is a winner in the board
-        return nil
+    var isEmpty: Bool {
+        !status.contains { $0 != .emptySquare }
+    }
+
+    func checkWinner(is player: Robot.Player) -> Bool {
+        for board in winnerBoards(for: player) {
+            var result: [String] = []
+            for (index, square) in board.enumerated() {
+                if status[index] != .emptySquare, status[index] == square {
+                    result.append(square)
+                }
+            }
+            if result.count >= 3 {
+                return true
+            }
+        }
+        return false
     }
 
     func areThereAnyMoreMoves() -> Bool {
-        return false
+        status.contains(.emptySquare)
+    }
+
+    private func winnerBoards(for player: Robot.Player) -> [[String]] {
+        let winnerSquare: String = player == .firstX ? .xSquare : .oSquare
+        return [
+            [
+                winnerSquare,
+                winnerSquare,
+                winnerSquare,
+                .emptySquare,
+                .emptySquare,
+                .emptySquare,
+                .emptySquare,
+                .emptySquare,
+                .emptySquare
+            ],
+            [
+                .emptySquare,
+                .emptySquare,
+                winnerSquare,
+                .emptySquare,
+                .emptySquare,
+                winnerSquare,
+                .emptySquare,
+                .emptySquare,
+                winnerSquare
+            ],
+            [
+                .emptySquare,
+                .emptySquare,
+                .emptySquare,
+                .emptySquare,
+                .emptySquare,
+                .emptySquare,
+                winnerSquare,
+                winnerSquare,
+                winnerSquare
+            ],
+            [
+                winnerSquare,
+                .emptySquare,
+                .emptySquare,
+                winnerSquare,
+                .emptySquare,
+                .emptySquare,
+                winnerSquare,
+                .emptySquare,
+                .emptySquare
+            ],
+            [
+                .emptySquare,
+                .emptySquare,
+                .emptySquare,
+                winnerSquare,
+                winnerSquare,
+                winnerSquare,
+                .emptySquare,
+                .emptySquare,
+                .emptySquare
+            ],
+            [
+                winnerSquare,
+                .emptySquare,
+                .emptySquare,
+                .emptySquare,
+                winnerSquare,
+                .emptySquare,
+                .emptySquare,
+                .emptySquare,
+                winnerSquare
+            ],
+            [
+                .emptySquare,
+                .emptySquare,
+                winnerSquare,
+                .emptySquare,
+                winnerSquare,
+                .emptySquare,
+                winnerSquare,
+                .emptySquare,
+                .emptySquare
+            ]
+        ]
     }
 }

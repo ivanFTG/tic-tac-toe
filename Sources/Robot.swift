@@ -13,6 +13,17 @@ class Robot {
     }
 
     func makePlayInBoard(_ board: Board) {
-        // the robot makes a random play on the board
+        var initialBoard = board.status
+        let boardSize = initialBoard.count
+        let initialEmptySquares = initialBoard.count { $0 == .emptySquare }
+        var endEmptySquares = initialEmptySquares
+        while initialEmptySquares > 0, initialEmptySquares == endEmptySquares {
+            let randomSquare = Int.random(in: 0..<boardSize)
+            if initialBoard[randomSquare] == .emptySquare {
+                initialBoard[randomSquare] = player == .firstX ? .xSquare : .oSquare
+                endEmptySquares -= 1
+                board.status = initialBoard
+            }
+        }
     }
 }

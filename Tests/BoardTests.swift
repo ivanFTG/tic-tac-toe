@@ -33,14 +33,17 @@ struct BoardTests {
             .emptySquare,
             .emptySquare
         ]
-        #expect(board.checkWinner() == nil, "Board should have no result yet")
+        #expect(!board.checkWinner(is: .firstX), "Board should have no result yet")
+        #expect(!board.checkWinner(is: .secondO), "Board should have no result yet")
+        #expect(board.areThereAnyMoreMoves(), "Board should have more moves to do")
     }
 
     @Test("Board checkWinner should return draw")
     func testDrawBoard() {
         let board = Board()
         board.status = [.xSquare, .xSquare, .oSquare, .oSquare, .oSquare, .xSquare, .xSquare, .xSquare, .oSquare]
-        #expect(board.checkWinner() == nil, "Board should return a draw result")
+        #expect(!board.checkWinner(is: .firstX), "Board should return no winner")
+        #expect(!board.checkWinner(is: .secondO), "Board should return no winner")
     }
 
     @Test("Board checkWinner should return firstX player")
@@ -57,7 +60,7 @@ struct BoardTests {
             .emptySquare,
             .emptySquare
         ]
-        #expect(board.checkWinner() == .firstX, "Board should return a firstX result")
+        #expect(board.checkWinner(is: .firstX), "Board should return a firstX result")
     }
 
     @Test("Board checkWinner should return secondO player")
@@ -74,7 +77,7 @@ struct BoardTests {
             .emptySquare,
             .oSquare
         ]
-        #expect(board.checkWinner() == .secondO, "Board should return a secondO result")
+        #expect(board.checkWinner(is: .secondO), "Board should return a secondO result")
     }
 
     @Test("Board areThereAnyMoreMoves should return true")

@@ -38,6 +38,7 @@ struct RobotTests {
         board.status = initialBoardStatus
 
         robot = Robot(player: .secondO)
+        robot.makePlayInBoard(board)
         let newOSquareCount = board.status.count { $0 == .oSquare }
         #expect(newOSquareCount == initialOSquareCount + 1, "Robot should have configured player secondO")
     }
@@ -59,7 +60,7 @@ struct RobotTests {
         let board = Board()
         board.status = initialBoardStatus
 
-        var robot = Robot(player: .firstX)
+        let robot = Robot(player: .firstX)
         robot.makePlayInBoard(board)
         #expect(board.status == initialBoardStatus, "Robot should have not made a play")
     }
