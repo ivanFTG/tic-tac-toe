@@ -18,6 +18,8 @@ class Board {
     }
 
     func checkWinner(is player: Robot.Player) -> Bool {
+        // Each winnerBoard has 3 positions in a row for a win
+        // We just need to cross each winning array with the board status
         for board in winnerBoards(for: player) {
             var result: [String] = []
             for (index, square) in board.enumerated() {

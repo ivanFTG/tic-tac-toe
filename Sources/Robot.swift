@@ -17,6 +17,7 @@ class Robot {
         let boardSize = initialBoard.count
         let initialEmptySquares = initialBoard.count { $0 == .emptySquare }
         var endEmptySquares = initialEmptySquares
+        // Calculate a random square and if it is empty make the move and fill the square
         while initialEmptySquares > 0, initialEmptySquares == endEmptySquares {
             let randomSquare = Int.random(in: 0..<boardSize)
             if initialBoard[randomSquare] == .emptySquare {
